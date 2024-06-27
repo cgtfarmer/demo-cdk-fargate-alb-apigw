@@ -85,6 +85,7 @@ export class ApiStack extends Stack {
     });
 
     const httpApi = new HttpApi(this, 'HttpApi', {
+      createDefaultStage: false,
       corsPreflight: {
         allowHeaders: ['Authorization'],
         allowMethods: [
@@ -102,10 +103,30 @@ export class ApiStack extends Stack {
       },
     });
 
+    httpApi.addStage('DefaultStage', {
+      stageName: '$default',
+      autoDeploy: true,
+      throttle: {
+        burstLimit: 2,
+        rateLimit: 1,
+      }
+    });
+
     httpApi.addRoutes({
       path: '/{proxy+}',
-      methods: [ HttpMethod.ANY ],
+      methods: [
+        HttpMethod.ANY,
+        // HttpMethod.GET,
+        // HttpMethod.HEAD,
+        // HttpMethod.OPTIONS,
+        // HttpMethod.POST,
+        // HttpMethod.DELETE,
+        // HttpMethod.PUT,
+        // HttpMethod.PATCH
+      ],
       integration: new HttpAlbIntegration('DefaultIntegration', listener),
     });
+
+    console.log(`HTTP API Default Stage URL: ${httpApi.url}`);
   }
 }
