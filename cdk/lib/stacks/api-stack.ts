@@ -126,7 +126,5 @@ export class ApiStack extends Stack {
       ],
       integration: new HttpAlbIntegration('DefaultIntegration', listener),
     });
-
-    console.log(`HTTP API Default Stage URL: ${httpApi.url}`);
   }
 }
