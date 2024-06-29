@@ -2,6 +2,8 @@
 
 This is a demo showing how to deploy a simple Express API to ECS Fargate, load balanced by a private Application Load Balancer, served by a publicly available API Gateway (HTTP API)
 
+![LessonGraphics-APIGW-ALB-Fargate](https://github.com/cgtfarmer/demo-cdk-fargate-alb-apigw/assets/33764231/e458bb83-ec21-429a-9ee9-5bdd73440df9)
+
 ## Prerequisites
 
 - Docker
